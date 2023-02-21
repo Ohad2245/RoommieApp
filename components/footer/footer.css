@@ -1,0 +1,25 @@
+.views{
+    color:rgb(177, 175, 175);
+    text-align: center;
+
+}
+.title2 {
+    width: 10px;
+    height: 20px;
+    background: transparent;
+    display: grid;
+    gap: 1px;
+    margin-top: 5.5px;
+    
+  }
+  
+  .title2 .e {
+    width: 18px;
+    height: 2.5px;
+    top: -7.2vmin;
+    border-bottom-right-radius: 10vmin;
+    border-bottom-left-radius: 10vmin;
+    background: black;
+
+  
+  }

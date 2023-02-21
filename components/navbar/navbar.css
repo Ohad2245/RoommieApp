@@ -1,0 +1,61 @@
+.title {
+  width: 10px;
+  height: 20px;
+  background: transparent;
+  margin-top: 9px;
+  display: grid;
+  gap: 1px;
+  
+}
+
+.title .e {
+  width: 18px;
+  height: 2.5px;
+  top: -7.2vmin;
+  border-bottom-right-radius: 10vmin;
+  border-bottom-left-radius: 10vmin;
+  background: black;
+
+}
+.line{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.line2{
+  margin-bottom: 10px;
+  background:gray;
+  height: 0.5px;
+  width: 70%;
+  justify-content: center;
+  align-items: center;
+  opacity: 10px;
+}
+.roommie {
+  color: 'black';
+  display: flex;
+  gap: 5px;
+  align-items: left;
+  font-size: x-large;
+  
+}
+.btn{
+  color:goldenrod;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
+
+* {
+  padding: 0px;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Titillium Web", sans-serif;
+}
+:root {
+  --mainColor: #2e3758;
+  --mainColorLight: #5767aa;
+  --secondaryColor: #db2b39;
+  --textColor: #eee;
+}
