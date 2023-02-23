@@ -28,7 +28,7 @@ const Navbar = () => {
     axios({
       method: "post",
       withCredentials: true,
-      url: "http://localhost:3000/api/logout",
+      url: "api/logout",
     })
     .then(() => window.location.href = '/')
     .catch((err) => console.log(err));
