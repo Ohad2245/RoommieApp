@@ -4,7 +4,7 @@ import { withSessionSsr } from 'lib/config/withSession';
 
 const PrivatePage = ({ user }) => (
     <div>
-        <h1>Hello {user.username}</h1>
+        <h1>Hello TestTestTestTest{user.username}</h1>
         <p>Secret Content</p>
     </div>
 );
