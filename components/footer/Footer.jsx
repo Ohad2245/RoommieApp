@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="flex flex-col">
           <div className="mb-[50px] h-[2px] bg-black opacity-10" />
           <div className="flex items-center justify-between flex-wrap gap-4">
-            <div className="roommie font-thin text-[24px] leading-[30px] text-black text-center footer ">
+            <div className="roommie2 font-thin text-[24px] leading-[30px] text-black text-center footer ">
               <p>R</p>
               <p>O</p>
               <p>O</p>

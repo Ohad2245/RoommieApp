@@ -1,8 +1,3 @@
-.views{
-    color:rgb(177, 175, 175);
-    text-align: center;
-
-}
 .title2 {
     width: 10px;
     height: 20px;
@@ -20,6 +15,8 @@
     border-bottom-right-radius: 10vmin;
     border-bottom-left-radius: 10vmin;
     background: black;
-
-  
+    
+  }
+  .roommie2{
+    filter:blur(1px);
   }
