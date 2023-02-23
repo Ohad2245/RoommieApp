@@ -1,7 +1,6 @@
 import React from 'react';
 import { withSessionSsr } from 'lib/config/withSession';
 
-
 const PrivatePage = ({ user }) => (
     <div>
         <h1>Hello {user.username}</h1>
