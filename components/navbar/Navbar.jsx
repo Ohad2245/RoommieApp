@@ -79,7 +79,7 @@ const Navbar = () => {
                 <MenuItem icon={<FiKey />}>Rent Property</MenuItem>
               </Link>
               <Button className="btn" onClick={logout}>
-                Logout Test
+                Logout
               </Button>
             </MenuList>
           </Menu>
