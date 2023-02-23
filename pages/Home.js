@@ -6,8 +6,6 @@ const PrivatePage = ({ user }) => (
     <div>
         <h1>Hello {user.username}</h1>
         <p>Secret Content</p>
-        <p>Extra Testing</p>
-        <p>Extra Testing123</p>
     </div>
 );
 
