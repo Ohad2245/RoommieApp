@@ -57,7 +57,7 @@ const Register = () => {
             progress: undefined,
             theme: "colored",
           },
-          router.push("/Login")
+          router.push("/Profile")
         );
       })
       .catch((error) => {

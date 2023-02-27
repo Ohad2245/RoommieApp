@@ -3,14 +3,12 @@ import { Box} from '@chakra-ui/react';
 import Navbar from './navbar/Navbar';
 import Footer from './footer/Footer';
 import { useRouter } from 'next/router'
-import {UserContext} from '../UserContext';
 
 
 function Layout ({children}){
     const router = useRouter();
     return(
     <>
-    
         <Head>
             <title>Real Estate</title>
             <link rel="icon" href="/favicon.ico" />

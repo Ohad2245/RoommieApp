@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from '../UserContext';
 import {useContext,useState} from 'react';
+import '../pages/Profile/profile.css';
 
 export default function App({ Component, pageProps }) {
 
@@ -28,7 +29,7 @@ export default function App({ Component, pageProps }) {
   const [loginUserName,setloginUserName] = useState(null);
 
   return (
-    <div>
+    <div className="bg-gray-100">
     <Head>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css' integrity='sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ==' crossOrigin='anonymous' referrerPolicy='no-referrer' />
     </Head>

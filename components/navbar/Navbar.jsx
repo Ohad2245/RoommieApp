@@ -15,7 +15,6 @@ import { BsSearch } from "react-icons/bs";
 import { FiKey } from "react-icons/fi";
 import React,{useContext} from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { UserContext } from "../../UserContext";
 
 const Navbar = () => {
