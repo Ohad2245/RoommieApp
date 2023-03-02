@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { Box} from '@chakra-ui/react';
 import Navbar from './navbar/Navbar';
 import Footer from './footer/Footer';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 
 function Layout ({children}){

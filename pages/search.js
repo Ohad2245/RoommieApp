@@ -6,9 +6,11 @@ import SearchFilters from '../components/SearchFilters';
 import Property from '../components/Property';
 import noresult from '../assets/images/noresult.svg';
 import {fetchApi,baseUrl} from '../utils/fetchApi';
+import { ChakraProvider } from '@chakra-ui/react';
 
 const Search = ({properties}) => {
     const [searchFilters,setSearchFilters] = useState(false);
+    
     const router = useRouter();
   return (
     <Box>

@@ -3,11 +3,13 @@ import Image from "next/image";
 import { Box, Icon, Flex } from "@chakra-ui/react";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
+import { ChakraProvider } from '@chakra-ui/react';
 
 const LeftArrow = () => {
   const { scrollPrev } = useContext(VisibilityContext);
 
   return (
+    <ChakraProvider>
     <Flex justifyContent="center" alignItems="center" marginRight="1">
       <Icon
         as={FaArrowAltCircleLeft}
@@ -16,6 +18,7 @@ const LeftArrow = () => {
         cursor="pointer"
       />
     </Flex>
+    </ChakraProvider>
   );
 };
 
@@ -23,6 +26,8 @@ const RightArrow = () => {
   const { scrollNext } = useContext(VisibilityContext);
 
   return (
+    <ChakraProvider>
+
     <Flex justifyContent="center" alignItems="center" marginRight="1">
       <Icon
         as={FaArrowAltCircleRight}
@@ -31,10 +36,14 @@ const RightArrow = () => {
         cursor="pointer"
       />
     </Flex>
+    </ChakraProvider>
+
   );
 };
 const ImageScrollbar = ({ data }) => {
   return (
+    <ChakraProvider>
+
     <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
       {data.map((item) => (
         <Box key={item.id} width="910px" itemId={item.id} overFlow="hidden" p="1">
@@ -50,6 +59,8 @@ const ImageScrollbar = ({ data }) => {
         </Box>
       ))}
     </ScrollMenu>
+    </ChakraProvider>
+
   );
 };
 

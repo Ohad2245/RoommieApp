@@ -16,6 +16,7 @@ import { FiKey } from "react-icons/fi";
 import React,{useContext} from "react";
 import axios from "axios";
 import { UserContext } from "../../UserContext";
+import {ChakraProvider} from '@chakra-ui/react';
 
 const Navbar = () => {
   const {loginUserName} = useContext(UserContext);
@@ -34,6 +35,7 @@ const Navbar = () => {
   };
 
   return (
+    <ChakraProvider>
     <div>
       <Flex p="2" borderBottom="1px" borderColor="gray.100">
         <Box>
@@ -85,6 +87,7 @@ const Navbar = () => {
         </Box>
       </Flex>
     </div>
+    </ChakraProvider>
   );
 };
 

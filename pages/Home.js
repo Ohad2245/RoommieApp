@@ -1,41 +1,39 @@
-import React from 'react';
-import { withSessionSsr } from 'lib/config/withSession';
+// import React from 'react';
+// import { withSessionSsr } from 'lib/config/withSession';
 
-const PrivatePage = ({ user }) => (
-    <div>
-        <h1>Hello {user.username}</h1>
-        <p>Secret Content</p>
-    </div>
-);
+// const PrivatePage = ({ user }) => (
+//     <div>
+//         <h1>Hello {user.username}</h1>
+//         <p>Secret Content</p>
+//     </div>
+// );
 
-export const getServerSideProps = withSessionSsr(
-    async ({req, res}) => {
-        const user = req.session.user;
-        console.log("Home Page, User: ", user);
+// export const getServerSideProps = withSessionSsr(
+//     async ({req, res}) => {
+//         const user = req.session.user;
+//         console.log("Home Page, User: ", user);
 
-        if(!user) {
-          console.log("Home Page - no user connected");
-          return {
-              notFound: true,
-          }
-        }
+//         if(!user) {
+//           console.log("Home Page - no user connected");
+//           return {
+//               notFound: true,
+//           }
+//         }
 
-        return {
-            props: { user }
-        }
-    }
-);
+//         return {
+//             props: { user }
+//         }
+//     }
+// );
 
-export default PrivatePage;
-
+// export default PrivatePage;
 
 //eslint-disable jsx-a11y/alt-text 
-// import { Flex, Box, Text, Button } from "@chakra-ui/react";
-// import { useEffect,useState } from "react";
-// import Property from "../components/Property";
-// import { baseUrl, fetchApi } from "../utils/fetchApi";
-// import axios from "axios";
-/*
+import { Flex, Box, Text, Button } from "@chakra-ui/react";
+import { useEffect,useState } from "react";
+import Property from "../components/Property";
+import { baseUrl, fetchApi } from "../utils/fetchApi";
+
 export default function Home({ propertiesForSale, propertiesForRent }) {
   console.log(propertiesForSale, propertiesForRent);
   
@@ -80,20 +78,19 @@ export default function Home({ propertiesForSale, propertiesForRent }) {
       </Flex> }
     </Box>
   );
-}*/
+}
+export const getStaticProps = async () =>{
+  const propertyForSale = await fetchApi(
+    `${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`
+  );
+  const propertyForRent = await fetchApi(
+    `${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`
+  );
 
-// export const getStaticProps = async () =>{
-//   const propertyForSale = await fetchApi(
-//     `${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`
-//   );
-//   const propertyForRent = await fetchApi(
-//     `${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`
-//   );
-
-//   return {
-//     props: {
-//       propertiesForSale: propertyForSale?.hits,
-//       propertiesForRent: propertyForRent?.hits,
-//     },
-//   };
-// }
+  return {
+    props: {
+      propertiesForSale: propertyForSale?.hits,
+      propertiesForRent: propertyForRent?.hits,
+    },
+  };
+}
