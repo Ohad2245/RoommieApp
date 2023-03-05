@@ -4,21 +4,29 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import convertToBase64 from "../components/convert";
-import axios from "axios";
 import { toast } from "react-toastify";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import dayjs from "dayjs";
-import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import CountryData from "../components/CountryData.json";
+import { Button } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import { FormControlLabel } from '@mui/material';
+import { useRouter } from "next/router";
+import {FcBusinessman} from 'react-icons/fc';
+import {FcBusinesswoman} from 'react-icons/fc';
 
 const Profile = () => {
+  
+  const router = useRouter();
+
   const [countries, setCountries] = useState(CountryData);
   const [selectedCountry, setSelectedCountry] = useState("Choose");
 
@@ -35,46 +43,6 @@ const Profile = () => {
     setValue(newValue);
   };
 
-  // const profile = () => {
-  //   axios({
-  //     method: "post",
-  //     data: {
-  //       image: file,
-  //     },
-  //     withCredentials: true,
-  //     url: "api/profile",
-  //   })
-  //     .then(() => {
-  //       setSuccess(true);
-  //       toast.success(
-  //         "Register Successfully !",
-  //         {
-  //           position: "top-center",
-  //           autoClose: 5000,
-  //           hideProgressBar: false,
-  //           closeOnClick: true,
-  //           pauseOnHover: true,
-  //           draggable: true,
-  //           progress: undefined,
-  //           theme: "colored",
-  //         },
-  //         router.push("/Login")
-  //       );
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error.response.data.error, {
-  //         position: "top-center",
-  //         autoClose: 5000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "colored",
-  //       });
-  //     });
-  // };
-
   const onUpload = async (e) => {
     const base64 = await convertToBase64(e.target.files[0]);
     setFile(base64);
@@ -84,6 +52,9 @@ const Profile = () => {
     setAge(event.target.value);
   };
 
+  const handleContinue = () =>{
+    router.push("/ChooseOffer")
+  }
   return (
     <div className="mx-auto">
       <div className="flex justify-center items-center h-screen">
@@ -113,7 +84,15 @@ const Profile = () => {
               />
             </div>
             <div style={{ display: "flex", gap: "5px" }}>
-              <FormControl style={{ width: "55%" }}>
+              <TextField
+                style={{ width: "50%" }}
+                label="First Name"
+              ></TextField>
+              <TextField style={{ width: "50%" }} label="Last Name"></TextField>
+            </div>
+            <br />
+            <div style={{ display: "flex", gap: "5px" }}>
+              <FormControl style={{ width: "50%" }}>
                 <InputLabel id="demo-simple-select-label">Gender</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
@@ -122,13 +101,13 @@ const Profile = () => {
                   label="Gender"
                   onChange={handleChange}
                 >
-                  <MenuItem value="male">Male</MenuItem>
-                  <MenuItem value="female">Female</MenuItem>
+                  <MenuItem value="male"><FcBusinessman/></MenuItem>
+                  <MenuItem value="female"><FcBusinesswoman/></MenuItem>
                 </Select>
               </FormControl>
 
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <Stack style={{ width: "55%" }}>
+                <Stack style={{ width: "50%" }}>
                   <DesktopDatePicker
                     label="Birthday"
                     inputFormat="MM/DD/YYYY"
@@ -140,7 +119,7 @@ const Profile = () => {
               </LocalizationProvider>
             </div>
             <br />
-            
+
             <div>
               <FormControl style={{ width: "100%" }}>
                 <InputLabel id="demo-simple-select-label">Country</InputLabel>
@@ -153,7 +132,12 @@ const Profile = () => {
                 </Select>
               </FormControl>
             </div>
+            <br></br>
+            <br></br>
           </form>
+          <Button onClick={handleContinue} fullWidth className="continue " variant="outlined">
+            Continue
+          </Button>
         </div>
       </div>
     </div>

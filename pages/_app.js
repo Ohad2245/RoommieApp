@@ -11,14 +11,15 @@ import NProgress from "nprogress";
 import { ChakraProvider } from "@chakra-ui/react";
 import "tailwindcss/tailwind.css";
 import Layout from "../components/Layout";
-import "../components/navbar/navbar.css";
-import "../components/footer/footer.css";
-import "./register/register.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../UserContext";
 import { useState } from "react";
-import "../pages/Profile/profile.css";
+import '../styles/profile.css';
+import '../styles/register.css';
+import '../styles/navbar.css';
+import '../styles/footer.css';
+import '../styles/chooseOffer.css';
 
 const clientSideEmotionCache = createEmotionCache();
 
