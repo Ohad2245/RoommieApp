@@ -18,24 +18,29 @@ import CountryData from "../components/CountryData.json";
 import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
-import { FormControlLabel } from '@mui/material';
+import { FormControlLabel } from "@mui/material";
 import { useRouter } from "next/router";
-import {FcBusinessman} from 'react-icons/fc';
-import {FcBusinesswoman} from 'react-icons/fc';
+import { FcBusinessman } from "react-icons/fc";
+import { FcBusinesswoman } from "react-icons/fc";
+import { TextareaAutosize } from "@material-ui/core";
 
 const Profile = () => {
-  
   const router = useRouter();
 
   const [countries, setCountries] = useState(CountryData);
   const [selectedCountry, setSelectedCountry] = useState("Choose");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [gender, setGender] = useState("");
+  const [bio, setBio] = useState("");
+
+  const [file, setFile] = useState();
+  const [age, setAge] = useState("");
 
   const handleChangeCountry = (event) => {
     setSelectedCountry(event.target.value);
   };
-
-  const [file, setFile] = useState();
-  const [age, setAge] = useState("");
 
   const [value, setValue] = useState(dayjs("2014-08-18T21:11:54"));
 
@@ -52,9 +57,53 @@ const Profile = () => {
     setAge(event.target.value);
   };
 
-  const handleContinue = () =>{
-    router.push("/ChooseOffer")
-  }
+  
+  const profile = () => {
+    axios({
+      method: "post",
+      data: {
+        country: countries,
+        birthday: birthday,
+        profileImage: file,
+        firstName: firstName,
+        lastName: lastName,
+        gender: gender,
+        bio: bio,
+      },
+      withCredentials: true,
+      url: "api/profile",
+    })
+      .then(() => {
+        setSuccess(true);
+        toast.success(
+          "Login Successfully !",
+          {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          },
+          router.push("/ChooseOffer")
+        );
+      })
+      .catch((error) => {
+        toast.error(error.response.data.error, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      });
+  };
+
   return (
     <div className="mx-auto">
       <div className="flex justify-center items-center h-screen">
@@ -87,22 +136,39 @@ const Profile = () => {
               <TextField
                 style={{ width: "50%" }}
                 label="First Name"
+                name="firstName"
+                onChange={(e) => setFirstName(e.target.value)}
               ></TextField>
-              <TextField style={{ width: "50%" }} label="Last Name"></TextField>
+              <TextField
+                style={{ width: "50%" }}
+                label="Last Name"
+                name="lastName"
+                onChange={(e) => setLastName(e.target.value)}
+              ></TextField>
             </div>
             <br />
             <div style={{ display: "flex", gap: "5px" }}>
               <FormControl style={{ width: "50%" }}>
-                <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                <InputLabel
+                  id="demo-simple-select-label"
+                  onChange={(e) => setGender(e.target.value)}
+                >
+                  Gender
+                </InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={age}
                   label="Gender"
+                  name="gender"
                   onChange={handleChange}
                 >
-                  <MenuItem value="male"><FcBusinessman/></MenuItem>
-                  <MenuItem value="female"><FcBusinesswoman/></MenuItem>
+                  <MenuItem value="male">
+                    <FcBusinessman />
+                  </MenuItem>
+                  <MenuItem value="female">
+                    <FcBusinesswoman />
+                  </MenuItem>
                 </Select>
               </FormControl>
 
@@ -110,6 +176,7 @@ const Profile = () => {
                 <Stack style={{ width: "50%" }}>
                   <DesktopDatePicker
                     label="Birthday"
+                    name="birthday"
                     inputFormat="MM/DD/YYYY"
                     value={value}
                     onChange={handleChangeDate}
@@ -123,7 +190,11 @@ const Profile = () => {
             <div>
               <FormControl style={{ width: "100%" }}>
                 <InputLabel id="demo-simple-select-label">Country</InputLabel>
-                <Select label="Country" onChange={handleChangeCountry}>
+                <Select
+                  label="Country"
+                  name="country"
+                  onChange={handleChangeCountry}
+                >
                   {countries.map((item) => {
                     return (
                       <MenuItem value={item.country}>{item.country}</MenuItem>
@@ -132,10 +203,20 @@ const Profile = () => {
                 </Select>
               </FormControl>
             </div>
-            <br></br>
-            <br></br>
+            <br />
+            <TextField
+              fullWidth
+              label="Bio"
+              name="bio"
+              onChange={(e) => setBio(e.target.value)}
+            />
           </form>
-          <Button onClick={handleContinue} fullWidth className="continue " variant="outlined">
+          <Button
+            onClick={profile}
+            fullWidth
+            className="continue "
+            variant="outlined"
+          >
             Continue
           </Button>
         </div>

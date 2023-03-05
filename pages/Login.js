@@ -39,7 +39,7 @@ const Login = () => {
       .then(() => {
         setSuccess(true);
         toast.success(
-          "Login Successfully !",
+          "Login Successfully!",
           {
             position: "top-center",
             autoClose: 5000,
