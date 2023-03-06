@@ -22,7 +22,7 @@ import { FormControlLabel } from "@mui/material";
 import { useRouter } from "next/router";
 import { FcBusinessman } from "react-icons/fc";
 import { FcBusinesswoman } from "react-icons/fc";
-import { TextareaAutosize } from "@material-ui/core";
+import axios from "axios";
 
 const Profile = () => {
   const router = useRouter();
