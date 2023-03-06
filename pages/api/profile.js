@@ -8,7 +8,11 @@ async function handler(req, res) {
         const user = req.session.user;
         if(!user) {
             console.log("No user connected");
-            res.status(404).send("");
+            res.status(400).send("No user connected");
+        }
+        else if(profileStage(user) === 1) {
+            console.log("User already has profile");
+            res.status(400).send("User already has profile");
         }
         else {
             console.log(req.body);

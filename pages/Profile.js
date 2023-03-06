@@ -23,8 +23,38 @@ import { useRouter } from "next/router";
 import { FcBusinessman } from "react-icons/fc";
 import { FcBusinesswoman } from "react-icons/fc";
 import axios from "axios";
+import { withSessionSsr } from 'lib/config/withSession';
+import { profileStage } from './api/profileStage';
 
-const Profile = () => {
+
+export const getServerSideProps = withSessionSsr(
+  async ({req, res}) => {
+      const user = req.session.user;
+      console.log("Profile Page, User: ", user);
+
+      if(!user) {
+        console.log("Profile Page - no user connected");
+        return {
+            notFound: true,
+        }
+      }
+
+      const status = profileStage(user);
+      console.log(status);
+      if(status === 1) {
+        console.log("Profile Page - user has profile");
+        return(
+          <Redirect to="/Home" />
+        );
+      }
+
+      return {
+          props: { user }
+      }
+  }
+);
+
+const Profile = ({ user }) => {
   const router = useRouter();
 
   const [countries, setCountries] = useState(CountryData);

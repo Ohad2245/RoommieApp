@@ -46,7 +46,7 @@ const Register = () => {
       .then(() => {
         setSuccess(true);
         toast.success(
-          "Register Successfully !",
+          "Register Successfully!",
           {
             position: "top-center",
             autoClose: 5000,
@@ -57,7 +57,7 @@ const Register = () => {
             progress: undefined,
             theme: "colored",
           },
-          router.push("/Profile")
+          router.push("/Login")
         );
       })
       .catch((error) => {
