@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import { Box, FormControlLabel, FormGroup, TextField } from "@material-ui/core";
-import React from "react";
+import React ,{useState} from "react";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
 import {FcBusinesswoman} from 'react-icons/fc';
 
-
-const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+const MaterialUISwitch2 = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -19,10 +18,11 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       color: '#fff',
       transform: 'translateX(22px)',
       '& .MuiSwitch-thumb:before': {
-        backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
+        backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="2.5 2 20 20"><path fill="${encodeURIComponent(
           '#fff',
-        )}" d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zM648.3 426.8l-87.7 161.1h45.7c5.5 0 10 4.5 10 10v21.3c0 5.5-4.5 10-10 10h-63.4v29.7h63.4c5.5 0 10 4.5 10 10v21.3c0 5.5-4.5 10-10 10h-63.4V752c0 5.5-4.5 10-10 10h-41.3c-5.5 0-10-4.5-10-10v-51.8h-63.1c-5.5 0-10-4.5-10-10v-21.3c0-5.5 4.5-10 10-10h63.1v-29.7h-63.1c-5.5 0-10-4.5-10-10v-21.3c0-5.5 4.5-10 10-10h45.2l-88-161.1c-2.6-4.8-.9-10.9 4-13.6 1.5-.8 3.1-1.2 4.8-1.2h46c3.8 0 7.2 2.1 8.9 5.5l72.9 144.3 73.2-144.3a10 10 0 0 1 8.9-5.5h45c5.5 0 10 4.5 10 10 .1 1.7-.3 3.3-1.1 4.8z"/></svg>')`,
+        )}" d="M2 16h15v3H2zm18.5 0H22v3h-1.5zM18 16h1.5v3H18zm.85-8.27c.62-.61 1-1.45 1-2.38C19.85 3.5 18.35 2 16.5 2v1.5c1.02 0 1.85.83 1.85 1.85S17.52 7.2 16.5 7.2v1.5c2.24 0 4 1.83 4 4.07V15H22v-2.24c0-2.22-1.28-4.14-3.15-5.03zm-2.82 2.47H14.5c-1.02 0-1.85-.98-1.85-2s.83-1.75 1.85-1.75v-1.5c-1.85 0-3.35 1.5-3.35 3.35s1.5 3.35 3.35 3.35h1.53c1.05 0 1.97.74 1.97 2.05V15h1.5v-1.64c0-1.81-1.6-3.16-3.47-3.16z"/></svg>')`,
       },
+      
       '& + .MuiSwitch-track': {
         opacity: 1,
         backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
@@ -42,9 +42,10 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       top: 0,
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
-      backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
+      backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="2.5 1 20 20"><path fill="${encodeURIComponent(
         '#fff',
-      )}" d="M9.305 1.667V3.75h1.389V1.667h-1.39zm-4.707 1.95l-.982.982L5.09 6.072l.982-.982-1.473-1.473zm10.802 0L13.927 5.09l.982.982 1.473-1.473-.982-.982zM10 5.139a4.872 4.872 0 00-4.862 4.86A4.872 4.872 0 0010 14.862 4.872 4.872 0 0014.86 10 4.872 4.872 0 0010 5.139zm0 1.389A3.462 3.462 0 0113.471 10a3.462 3.462 0 01-3.473 3.472A3.462 3.462 0 016.527 10 3.462 3.462 0 0110 6.528zM1.665 9.305v1.39h2.083v-1.39H1.666zm14.583 0v1.39h2.084v-1.39h-2.084zM5.09 13.928L3.616 15.4l.982.982 1.473-1.473-.982-.982zm9.82 0l-.982.982 1.473 1.473.982-.982-1.473-1.473zM9.305 16.25v2.083h1.389V16.25h-1.39z"/></svg>')`,
+      )}" d="m2 6 6.99 7H2v3h9.99l7 7 1.26-1.25-17-17zm18.5 7H22v3h-1.5zM18 13h1.5v3H18zm.85-8.12c.62-.61 1-1.45 1-2.38h-1.5c0 1.02-.83 1.85-1.85 1.85v1.5c2.24 0 4 1.83 4 4.07V12H22V9.92c0-2.23-1.28-4.15-3.15-5.04zM14.5 8.7h1.53c1.05 0 1.97.74 1.97 2.05V12h1.5v-1.59c0-1.8-1.6-3.16-3.47-3.16H14.5c-1.02 0-1.85-.98-1.85-2s.83-1.75 1.85-1.75V2c-1.85 0-3.35 1.5-3.35 3.35s1.5 3.35 3.35 3.35zm2.5 7.23V13h-2.93z"/></svg>')`,
+    
     },
   },
   '& .MuiSwitch-track': {
@@ -55,6 +56,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const Seeking = () => {
+  const [smoker,setSmoker] = useState();
+
   return (
     <div className="mx-auto">
       <div className="flex justify-center items-center h-screen">
@@ -63,17 +66,16 @@ const Seeking = () => {
             <h4 className="text-5xl font-bold">Hello Again!</h4>
             <span className="py-4 text-xl w-2/3 text-center text-gray-500"></span>
             <div className="flex gap-5">
-              <Switch checkedIcon={<FcBusinesswoman/>} />
-              <TextField label="Smoking?" variant="outlined" />
+              <Box>
               <FormGroup>
                 <FormControlLabel
-                  control={<MaterialUISwitch sx={{ m: 1 }} />}
-                  label="MUI switch"
+                  control={<MaterialUISwitch2 sx={{ m: 1 }} />}
+                  label="Smoker?"
+                  onChange={() => setSmoker(!smoker)}
+                  
                 />
               </FormGroup>
-              <FcBusinesswoman/>
-              <Box>
-
+              {!smoker ? (<h1>Smoker</h1>) : <h1> No Smoker</h1>}
               </Box>
             </div>
           </div>

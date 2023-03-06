@@ -31,26 +31,31 @@ const Profile = () => {
   const [selectedCountry, setSelectedCountry] = useState("Choose");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [birthday, setBirthday] = useState("");
   const [gender, setGender] = useState("");
   const [bio, setBio] = useState("");
 
   const [file, setFile] = useState();
   const [age, setAge] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const handleChangeCountry = (event) => {
     setSelectedCountry(event.target.value);
   };
 
-  const [value, setValue] = useState(dayjs("2014-08-18T21:11:54"));
+  const [value, setValue] = useState(dayjs(""));
 
   const handleChangeDate = (newValue) => {
     setValue(newValue);
+    setAge(newValue);
   };
 
   const onUpload = async (e) => {
     const base64 = await convertToBase64(e.target.files[0]);
     setFile(base64);
+  };
+
+  const handleChangeGender = (event) => {
+    setGender(event.target.value);
   };
 
   const handleChange = (event) => {
@@ -62,8 +67,8 @@ const Profile = () => {
     axios({
       method: "post",
       data: {
-        country: countries,
-        birthday: birthday,
+        country: selectedCountry,
+        birthday: age,
         profileImage: file,
         firstName: firstName,
         lastName: lastName,
@@ -76,7 +81,7 @@ const Profile = () => {
       .then(() => {
         setSuccess(true);
         toast.success(
-          "Login Successfully !",
+          "Profile created!",
           {
             position: "top-center",
             autoClose: 5000,
@@ -136,13 +141,11 @@ const Profile = () => {
               <TextField
                 style={{ width: "50%" }}
                 label="First Name"
-                name="firstName"
                 onChange={(e) => setFirstName(e.target.value)}
               ></TextField>
               <TextField
                 style={{ width: "50%" }}
                 label="Last Name"
-                name="lastName"
                 onChange={(e) => setLastName(e.target.value)}
               ></TextField>
             </div>
@@ -158,10 +161,9 @@ const Profile = () => {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={age}
+                  value={gender}
                   label="Gender"
-                  name="gender"
-                  onChange={handleChange}
+                  onChange={handleChangeGender}
                 >
                   <MenuItem value="male">
                     <FcBusinessman />
@@ -175,8 +177,7 @@ const Profile = () => {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Stack style={{ width: "50%" }}>
                   <DesktopDatePicker
-                    label="Birthday"
-                    name="birthday"
+                    label="Birthday" 
                     inputFormat="MM/DD/YYYY"
                     value={value}
                     onChange={handleChangeDate}
@@ -192,7 +193,6 @@ const Profile = () => {
                 <InputLabel id="demo-simple-select-label">Country</InputLabel>
                 <Select
                   label="Country"
-                  name="country"
                   onChange={handleChangeCountry}
                 >
                   {countries.map((item) => {
@@ -207,7 +207,6 @@ const Profile = () => {
             <TextField
               fullWidth
               label="Bio"
-              name="bio"
               onChange={(e) => setBio(e.target.value)}
             />
           </form>
