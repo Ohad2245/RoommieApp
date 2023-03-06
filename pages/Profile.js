@@ -44,7 +44,8 @@ export const getServerSideProps = withSessionSsr(
       if(status === 1) {
         console.log("Profile Page - user has profile");
         return(
-          <Redirect to="/Home" />
+          router.push("/Home")
+          // <Redirect to="/Home" />
         );
       }
 

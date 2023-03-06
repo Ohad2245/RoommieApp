@@ -107,6 +107,13 @@ const IOSSwitch = styled((props) => (
 }));
 
 const Seeking = () => {
+  const profileStage = () =>{
+    const status = profileStage(user);
+    console.log('status',status);
+    return status;
+  }
+
+
   const [smoker, setSmoker] = useState();
 
   return (
@@ -116,7 +123,7 @@ const Seeking = () => {
           <div>
             <h4 className="text-5xl font-bold">Hello Again!</h4>
             <span className="py-4 text-xl w-2/3 text-center text-gray-500">Test</span>
-            <div >
+            <div>
               <Box>
                 <FormGroup>
                   <FormControlLabel
@@ -130,7 +137,30 @@ const Seeking = () => {
                   <div className="flex flex-start gap-5">
                     <p>
                       Does it bother you if someone <br /> smokes in your
-                      apartment?"
+                      apartment?
+                    </p>
+                    <FormControlLabel control={<IOSSwitch defaultChecked />} />
+                  </div>
+                )}
+              </Box>
+            </div>
+            <br/>
+            <div>
+              <Box>
+              <h1>Pet</h1>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<MaterialUISwitch2 sx={{ m: 1 }} />}
+                    onChange={() => setSmoker(!smoker)}
+                  />
+                </FormGroup>
+                {smoker ? (
+                  ""
+                ) : (
+                  <div className="flex flex-start gap-5">
+                    <p>
+                      Does it bother you if someone <br /> smokes in your
+                      apartment?
                     </p>
                     <FormControlLabel control={<IOSSwitch defaultChecked />} />
                   </div>
@@ -144,4 +174,4 @@ const Seeking = () => {
   );
 };
 
-export default Seeking;
+export default Seeking;
