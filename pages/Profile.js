@@ -23,10 +23,10 @@ import { useRouter } from "next/router";
 import { FcBusinessman } from "react-icons/fc";
 import { FcBusinesswoman } from "react-icons/fc";
 import axios from "axios";
-import { withSessionSsr } from 'lib/config/withSession';
-import { profileStage } from './api/profileStage';
+import { withSessionSsr } from "lib/config/withSession";
+import { profileStage } from "./api/profileStage";
 
-
+/*
 export const getServerSideProps = withSessionSsr(
   async ({req, res}) => {
       const user = req.session.user;
@@ -44,8 +44,7 @@ export const getServerSideProps = withSessionSsr(
       if(status === 1) {
         console.log("Profile Page - user has profile");
         return(
-          router.push("/Home")
-          // <Redirect to="/Home" />
+          <Redirect to="/Home" />
         );
       }
 
@@ -54,6 +53,24 @@ export const getServerSideProps = withSessionSsr(
       }
   }
 );
+*/
+export const getServerSideProps = withSessionSsr(async ({ req, res }) => {
+  const user = req.session.user;
+  console.log("Profile Page, User: ", user);
+
+  if (!user) {
+    console.log("Profile Page - no user connected");
+    return {
+      notFound: true,
+    };
+  }
+
+  const status = profileStage(user);
+  console.log("status: " + status);
+  return {
+    props: { user },
+  };
+});
 
 const Profile = ({ user }) => {
   const router = useRouter();
@@ -93,7 +110,6 @@ const Profile = ({ user }) => {
     setAge(event.target.value);
   };
 
-  
   const profile = () => {
     axios({
       method: "post",
@@ -145,7 +161,11 @@ const Profile = ({ user }) => {
       <div className="flex justify-center items-center h-screen">
         <div className="glass">
           <div className="flex flex-col items-center">
-            <h4 className="text-5xl font-bold">Hello Again!</h4>
+            <h4 className="text-5xl font-bold">
+              
+              {user.username + ' '}
+              Hello Again!
+            </h4>
             <span className="py-4 text-xl w-2/3 text-center text-gray-500">
               Create your profile.
             </span>
@@ -208,7 +228,7 @@ const Profile = ({ user }) => {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Stack style={{ width: "50%" }}>
                   <DesktopDatePicker
-                    label="Birthday" 
+                    label="Birthday"
                     inputFormat="MM/DD/YYYY"
                     value={value}
                     onChange={handleChangeDate}
@@ -222,10 +242,7 @@ const Profile = ({ user }) => {
             <div>
               <FormControl style={{ width: "100%" }}>
                 <InputLabel id="demo-simple-select-label">Country</InputLabel>
-                <Select
-                  label="Country"
-                  onChange={handleChangeCountry}
-                >
+                <Select label="Country" onChange={handleChangeCountry}>
                   {countries.map((item) => {
                     return (
                       <MenuItem value={item.country}>{item.country}</MenuItem>

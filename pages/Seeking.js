@@ -6,8 +6,14 @@ import React, { useState } from "react";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
 import { FcBusinesswoman } from "react-icons/fc";
+import { FcBusinessman } from "react-icons/fc";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { useRouter } from "next/router";
 
-const MaterialUISwitch2 = styled(Switch)(({ theme }) => ({
+const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -54,7 +60,6 @@ const MaterialUISwitch2 = styled(Switch)(({ theme }) => ({
     borderRadius: 20 / 2,
   },
 }));
-
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
@@ -107,14 +112,33 @@ const IOSSwitch = styled((props) => (
 }));
 
 const Seeking = () => {
-  const profileStage = () =>{
-    const status = profileStage(user);
-    console.log('status',status);
-    return status;
-  }
+  const router = useRouter();
 
+  const profileStage = () => {
+    const status = profileStage(user);
+    console.log("status", status);
+    return status;
+  };
+
+  const Seeking = () => {
+    const profileStage = () => {
+      const status = profileStage(user);
+      console.log("status", status);
+      return status;
+    };
+  };
 
   const [smoker, setSmoker] = useState();
+  const [pet, setPet] = useState();
+  const [gender, setGender] = useState();
+  const [status, setStatus] = useState();
+
+  const handleChangeGender = (event) => {
+    setGender(event.target.value);
+  };
+  const handleChangeStatus = (event) => {
+    setStatus(event.target.value);
+  };
 
   return (
     <div className="mx-auto">
@@ -122,15 +146,15 @@ const Seeking = () => {
         <div className="glass">
           <div>
             <h4 className="text-5xl font-bold">Hello Again!</h4>
-            <span className="py-4 text-xl w-2/3 text-center text-gray-500">Test</span>
+            <span className="py-4 text-xl w-2/3 text-center text-gray-500">
+              Test
+            </span>
             <div>
-              <Box>
-                <FormGroup>
-                  <FormControlLabel
-                    control={<MaterialUISwitch2 sx={{ m: 1 }} />}
-                    onChange={() => setSmoker(!smoker)}
-                  />
-                </FormGroup>
+              <div>
+                <FormControlLabel
+                  control={<MaterialUISwitch sx={{ m: 1 }} />}
+                  onChange={() => setSmoker(!smoker)}
+                />
                 {smoker ? (
                   ""
                 ) : (
@@ -142,19 +166,19 @@ const Seeking = () => {
                     <FormControlLabel control={<IOSSwitch defaultChecked />} />
                   </div>
                 )}
-              </Box>
+              </div>
             </div>
-            <br/>
+            <br />
             <div>
-              <Box>
-              <h1>Pet</h1>
+              <div>
+                <h1>Pet</h1>
                 <FormGroup>
                   <FormControlLabel
-                    control={<MaterialUISwitch2 sx={{ m: 1 }} />}
-                    onChange={() => setSmoker(!smoker)}
+                    control={<MaterialUISwitch sx={{ m: 1 }} />}
+                    onChange={() => setPet(!pet)}
                   />
                 </FormGroup>
-                {smoker ? (
+                {pet ? (
                   ""
                 ) : (
                   <div className="flex flex-start gap-5">
@@ -165,7 +189,72 @@ const Seeking = () => {
                     <FormControlLabel control={<IOSSwitch defaultChecked />} />
                   </div>
                 )}
-              </Box>
+              </div>
+              <br />
+              <div style={{ display: "flex", gap: "5px" }}>
+                <FormControl style={{ width: "50%" }}>
+                  <InputLabel
+                    id="demo-simple-select-label"
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    Apartment with just
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={gender}
+                    label="Apartment with just"
+                    onChange={handleChangeGender}
+                  >
+                    <MenuItem value="male">
+                      <FcBusinessman />
+                    </MenuItem>
+                    <MenuItem value="female">
+                      <FcBusinesswoman />
+                    </MenuItem>
+                    <MenuItem value="dont care">
+                      <small>Don't care</small>
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl style={{ width: "50%" }}>
+                  <InputLabel
+                    id="demo-simple-select-label"
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    Status
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={gender}
+                    label="Status"
+                    onChange={handleChangeGender}
+                  >
+                    <MenuItem value="Solider">
+                      <small>Solider</small>
+                    </MenuItem>
+                    <MenuItem value="Student">
+                      <small>Student</small>
+                    </MenuItem>
+                    <MenuItem value="Lone Solder">
+                      <small>Lone Solder</small>
+                    </MenuItem>
+                    <MenuItem value="Just Graduated">
+                      <small>Just Graduated</small>
+                    </MenuItem>
+                    <MenuItem value="Employed ">
+                      <small>Employed </small>
+                    </MenuItem>
+                    <MenuItem value="Oleh Hadash ">
+                      <small>Oleh Hadash </small>
+                    </MenuItem>
+                    <MenuItem value="Other ">
+                      <small>Other </small>
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
             </div>
           </div>
         </div>

@@ -52,3 +52,21 @@
     width: 16.5em; 
     height: 9.5em;
 }
+.img1,.img2{
+    width:500px;
+}
+@media screen and (max-width:1024px) {
+    .img1,.img2{
+        width:300px;
+    }
+
+}
+
+/* ================= Media Queries Small ================= */
+
+@media screen and (max-width:600px) { 
+    .img1,.img2{
+        width:150px;
+    }
+
+}

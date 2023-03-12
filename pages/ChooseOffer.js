@@ -15,8 +15,8 @@ const ChooseOffer = () => {
   const router = useRouter();
 
   return (
-    <div className="mx-auto">
-      <div className="flex justify-center items-center h-screen">
+    <div className="auto-max">
+      <div className="flex justify-center items-center h-full">
         <div className="glass">
           <div className="flex flex-col items-center">
             <h4 className="text-5xl font-bold">Hello Again!</h4>
@@ -28,7 +28,7 @@ const ChooseOffer = () => {
                 <h1>Seeking?</h1>
               <img
                 src="/4fc2ba69-2011-4876-8178-28731ed094e7.jpg"
-                width={"300px"}
+                
                 className="img1"
               />
               </button>
@@ -37,7 +37,6 @@ const ChooseOffer = () => {
 
                <img
                 src="/planet-02.png"
-                width={"300px"}
                 className="img2"
 
               />

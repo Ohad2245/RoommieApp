@@ -1,5 +1,9 @@
+// AIzaSyCkxxy1RdAq21NHwKn8gWN8TApRF6aRXl0
+
+
 const db_connect = require("./db");
 import { withSessionRoute } from "lib/config/withSession";
+import { profileStage } from './profileStage';
 
 export default withSessionRoute(handler);
 
@@ -10,7 +14,7 @@ async function handler(req, res) {
             console.log("No user connected");
             res.status(400).send("No user connected");
         }
-        else if(profileStage(user) === 1) {
+        else if(profileStage(user) === "1") {
             console.log("User already has profile");
             res.status(400).send("User already has profile");
         }
@@ -77,8 +81,11 @@ async function handler(req, res) {
                 //close db
                 db.end();
             }
+
         }
+       
     }
+    
     // if not post request
     else {
         console.log("Not a post request");
