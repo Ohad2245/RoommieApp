@@ -1,5 +1,4 @@
     //   googleMapsApiKey="AIzaSyCkxxy1RdAq21NHwKn8gWN8TApRF6aRXl0"
-    
     //     mapContainerStyle={containerStyle} 
 
 const db_connect = require("./db");
@@ -8,14 +7,78 @@ import { profileStage } from './profileStage';
 
 export default withSessionRoute(handler);
 
+function getState(user){
+    /*const resState = await fetch('http://localhost:3000/api/profileState', {
+        method: 'GET',
+        credentials: 'same-origin'
+    })
+        .then((response) =>response.json())
+        .then((json) => {
+        console.log('Gotcha', json);
+        }).catch((err) => {
+        console.log(err);
+    });*/
+
+    /*const resState = await fetch('http://127.0.0.1:3000/api/profileState', {
+        credentials: "include"
+    });
+    const data = await resState.json();*/
+
+    axios({
+        method: "post",
+        data: {
+        id: user.id,
+        username: user.username
+        },
+        withCredentials: true,
+        url: "http://localhost:3000/api/profileState",
+    }).then(function (response) {
+        console.log(response.data);
+        return response;
+    });
+}
+  
+
 async function handler(req, res) {
     if (req.method === 'POST') {
+        /*
+        const data = getState(user);
+    
+        console.log(data);
+        if(data.value === -1) {
+            console.log("Profile Page - no user connected");
+            return {
+                notFound: true,
+            }
+        }
+        else if (data.value === 0) {
+            console.log("User doesn't have profile");
+            return {
+                props: { user }
+            }
+        }
+        else if (data.value === 1) {
+            console.log("User already has profile");
+            return {
+                redirect: {
+                destination: '/Home',
+                permanent: false,
+                },
+            }
+        }
+        else {
+            return {
+                notFound: true,
+                //props: { user }
+            }
+        }
+        */
         const user = req.session.user;
         if(!user) {
             console.log("No user connected");
             res.status(400).send("No user connected");
         }
-        else if(profileStage(user) === "1") {
+        else if(profileStage(user) === "1") {   //needs to be fixed
             console.log("User already has profile");
             res.status(400).send("User already has profile");
         }

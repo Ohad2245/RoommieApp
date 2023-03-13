@@ -66,7 +66,7 @@ export const getServerSideProps = withSessionSsr(async ({ req, res }) => {
   }
 
   const status = profileStage(user);
-  console.log("status: " + status);
+  console.log("status: ", status);
   return {
     props: { user },
   };
