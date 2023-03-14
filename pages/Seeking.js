@@ -183,7 +183,7 @@ const Seeking = () => {
                 ) : (
                   <div className="flex flex-start gap-5">
                     <p>
-                      Does it bother you if someone <br /> smokes in your
+                      Does it bother you if someone <br /> has a pet in your
                       apartment?
                     </p>
                     <FormControlLabel control={<IOSSwitch defaultChecked />} />
